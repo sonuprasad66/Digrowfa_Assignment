@@ -4,7 +4,7 @@ import axios from "axios";
 export const addUser = (payload) => (dispatch) => {
   dispatch({ type: types.ADD_USER_DATA_REQUEST });
   return axios
-    .post(`http://localhost:8080/adduser`, payload)
+    .post(`https://digrowfa.onrender.com/adduser`, payload)
     .then((res) => {
       //   console.log(res.data);
       return dispatch({ type: types.ADD_USER_DATA_SUCCESS, payload: res.data });
@@ -17,7 +17,7 @@ export const addUser = (payload) => (dispatch) => {
 export const getUser = () => (dispatch) => {
   dispatch({ type: types.GET_USER_DATA_REQUEST });
   return axios
-    .get(`http://localhost:8080/getuser`)
+    .get(`https://digrowfa.onrender.com/getuser`)
     .then((res) => {
       console.log(res.data);
       return dispatch({ type: types.GET_USER_DATA_SUCCESS, payload: res.data });
@@ -30,7 +30,7 @@ export const getUser = () => (dispatch) => {
 export const updateUser = (payload) => (dispatch) => {
   dispatch({ type: types.UPDATE_USER_DATA_REQUEST });
   return axios
-    .patch(`http://localhost:8080/updateuser`, payload)
+    .patch(`https://digrowfa.onrender.com/updateuser`, payload)
     .then((res) => {
       //   console.log(res.data);
       return dispatch({
@@ -45,7 +45,7 @@ export const updateUser = (payload) => (dispatch) => {
 
 export const deleteUser = (id) => (dispatch) => {
   return axios
-    .delete(`http://localhost:8080/deleteuser/${id}`)
+    .delete(`https://digrowfa.onrender.com/deleteuser/${id}`)
     .then((res) => {
       console.log("userDelete", res.data);
       return dispatch({
@@ -61,7 +61,7 @@ export const deleteUser = (id) => (dispatch) => {
 export const searchUser = (search) => (dispatch) => {
   dispatch({ type: types.GET_USER_DATA_REQUEST });
   return axios
-    .get(`http://localhost:8080/getuser?search=${search}`)
+    .get(`https://digrowfa.onrender.com/getuser?search=${search}`)
     .then((res) => {
       console.log(res.data);
       return dispatch({ type: types.GET_USER_DATA_SUCCESS, payload: res.data });
@@ -74,7 +74,7 @@ export const searchUser = (search) => (dispatch) => {
 export const filterByCountry = (payload) => (dispatch) => {
   dispatch({ type: types.GET_USER_DATA_REQUEST });
   return axios
-    .get(`http://localhost:8080/getuser?country=${payload}`)
+    .get(`https://digrowfa.onrender.com/getuser?country=${payload}`)
     .then((res) => {
       console.log(res.data);
       return dispatch({ type: types.GET_USER_DATA_SUCCESS, payload: res.data });
@@ -87,7 +87,7 @@ export const filterByCountry = (payload) => (dispatch) => {
 export const sortByDob = (payload) => (dispatch) => {
   dispatch({ type: types.GET_USER_DATA_REQUEST });
   return axios
-    .get(`http://localhost:8080/getuser?sort=${payload}`)
+    .get(`https://digrowfa.onrender.com/getuser?sort=${payload}`)
     .then((res) => {
       console.log(res.data);
       return dispatch({ type: types.GET_USER_DATA_SUCCESS, payload: res.data });
