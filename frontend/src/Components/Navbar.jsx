@@ -22,7 +22,7 @@ export const Navbar = () => {
           as={NavLink}
           to="/"
         >
-          MERN Assignments
+          Digrowfa
         </Heading>
 
         <Flex gap={1}>

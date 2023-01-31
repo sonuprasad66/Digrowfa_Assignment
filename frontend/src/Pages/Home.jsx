@@ -1,40 +1,40 @@
-import { Box, Button, Flex, Input, Select } from "@chakra-ui/react";
-import React from "react";
+import { Box, Button } from "@chakra-ui/react";
+import { CSVLink } from "react-csv";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Filter } from "../Components/Filter";
 import { TableData } from "../Components/TableData";
+import { getUser } from "../Redux/User/action";
+import { useCSVDownloader } from "react-papaparse";
 
 export const Home = () => {
+  const dispatch = useDispatch();
+  const { CSVDownloader } = useCSVDownloader();
+  const users = useSelector((state) => state.UserReducer.data);
+
+  useEffect(() => {
+    dispatch(getUser());
+  }, []);
+
+  console.log(users);
+
   return (
     <>
-      <Flex
-        justifyContent={"space-around"}
-        alignItems={"center"}
-        p={5}
-        mt={5}
-        style={{
-          boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-        }}
-      >
-        <Flex gap={2}>
-          <Input w={"400px"} placeholder="Search By Name or Address" />
-          <Button colorScheme={"blue"}>Search</Button>
-        </Flex>
-        <Box>
-          <Select placeholder="Filter By Country">
-            <option value="india">India</option>
-            <option value="usa">USA</option>
-            <option value="uk">UK</option>
-          </Select>
-        </Box>
-        <Box>
-          <Select placeholder="Sort By DOB">
-            <option value="Assending">Assending</option>
-            <option value="Desending">Desending</option>
-          </Select>
-        </Box>
-      </Flex>
+      <Filter />
 
-      <Box w={"100%"} textAlign={"center"} mt={5}>
-        <Button colorScheme={"blue"}>Download CSV File</Button>
+      <Box w={"20%"} textAlign={"center"} m={"10px auto"}>
+        <CSVDownloader
+          filename={"result"}
+          bom={true}
+          config={{
+            delimiter: ",",
+          }}
+          data={users}
+        >
+          <Button mt={"10px"} w={"full"} colorScheme={"blue"}>
+            Download CSV File
+          </Button>
+        </CSVDownloader>
       </Box>
 
       <TableData />

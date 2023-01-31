@@ -14,12 +14,82 @@ export const addUser = (payload) => (dispatch) => {
     });
 };
 
-export const getUser = (payload) => (dispatch) => {
+export const getUser = () => (dispatch) => {
   dispatch({ type: types.GET_USER_DATA_REQUEST });
   return axios
     .get(`http://localhost:8080/getuser`)
     .then((res) => {
+      console.log(res.data);
+      return dispatch({ type: types.GET_USER_DATA_SUCCESS, payload: res.data });
+    })
+    .catch((err) => {
+      dispatch({ type: types.GET_USER_DATA_FAILURE, payload: err });
+    });
+};
+
+export const updateUser = (payload) => (dispatch) => {
+  dispatch({ type: types.UPDATE_USER_DATA_REQUEST });
+  return axios
+    .patch(`http://localhost:8080/updateuser`, payload)
+    .then((res) => {
       //   console.log(res.data);
+      return dispatch({
+        type: types.UPDATE_USER_DATA_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({ type: types.UPDATE_USER_DATA_FAILURE, payload: err });
+    });
+};
+
+export const deleteUser = (id) => (dispatch) => {
+  return axios
+    .delete(`http://localhost:8080/deleteuser/${id}`)
+    .then((res) => {
+      console.log("userDelete", res.data);
+      return dispatch({
+        type: types.DELETE_USER_DATA_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const searchUser = (search) => (dispatch) => {
+  dispatch({ type: types.GET_USER_DATA_REQUEST });
+  return axios
+    .get(`http://localhost:8080/getuser?search=${search}`)
+    .then((res) => {
+      console.log(res.data);
+      return dispatch({ type: types.GET_USER_DATA_SUCCESS, payload: res.data });
+    })
+    .catch((err) => {
+      dispatch({ type: types.GET_USER_DATA_FAILURE, payload: err });
+    });
+};
+
+export const filterByCountry = (payload) => (dispatch) => {
+  dispatch({ type: types.GET_USER_DATA_REQUEST });
+  return axios
+    .get(`http://localhost:8080/getuser?country=${payload}`)
+    .then((res) => {
+      console.log(res.data);
+      return dispatch({ type: types.GET_USER_DATA_SUCCESS, payload: res.data });
+    })
+    .catch((err) => {
+      dispatch({ type: types.GET_USER_DATA_FAILURE, payload: err });
+    });
+};
+
+export const sortByDob = (payload) => (dispatch) => {
+  dispatch({ type: types.GET_USER_DATA_REQUEST });
+  return axios
+    .get(`http://localhost:8080/getuser?sort=${payload}`)
+    .then((res) => {
+      console.log(res.data);
       return dispatch({ type: types.GET_USER_DATA_SUCCESS, payload: res.data });
     })
     .catch((err) => {
