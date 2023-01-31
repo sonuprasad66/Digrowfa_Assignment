@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema(
     country: { type: String, require: true },
   },
   {
-    timestamps: true,
+    versionKey: false,
   }
 );
 
